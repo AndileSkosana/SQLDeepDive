@@ -1,0 +1,38 @@
+1. For each order, calculate a subtotal for each Order (identified by OrderID). This is a simple query using GROUP BY to aggregate data for each order.
+Select OrderID, 
+    format(sum(UnitPrice * Quantity * (1 - Discount)), 2) as Subtotal
+from order_details
+group by OrderID
+order by OrderID;
+
+2. This query shows how to get the year part from Shipped_Date column. A subtotal is calculated by a sub-query for each order. The sub-query forms a table and then joined with the Orders table.
+Select distinct date(a.ShippedDate) as ShippedDate, 
+    a.OrderID, 
+    b.Subtotal, 
+    year(a.ShippedDate) as Year
+from Orders a 
+inner join
+(
+    -- Get subtotal for each order
+    select distinct OrderID, 
+        format(sum(UnitPrice * Quantity * (1 - Discount)), 2) as Subtotal
+    from order_details
+    group by OrderID    
+) b on a.OrderID = b.OrderID
+where a.ShippedDate is not null
+    and a.ShippedDate between date('1996-12-24') and date('1997-09-30')
+order by a.ShippedDate;
+
+3. For each employee, get their sales amount, broken down by country name.
+Select distinct b.*, a.CategoryName
+from Categories a 
+inner join Products b on a.CategoryID = b.CategoryID
+where b.Discontinued = 'N'
+order by b.ProductName;
+
+4. This is a rather simple query to get an alphabetical list of products.
+select distinct b.*, a.Category_Name
+from Categories a 
+inner join Products b on a.Category_ID = b.Category_ID
+where b.Discontinued = 'N'
+order by b.Product_Name;
