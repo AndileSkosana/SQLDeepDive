@@ -1,0 +1,8 @@
+-- This is an example srcipt of creating a regular view
+
+CREATE VIEW DEDOREXP_Products
+AS
+SELECT ProductID, ProductName
+from products
+where Discontinued = 'N'
+order by ProductName;
