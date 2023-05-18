@@ -1,0 +1,9 @@
+-- This is an example script on how to create a materilaized view.
+
+CREATE MATERIALIZED VIEW DEDOREXP_Products
+AS
+Select ProductID, ProductName
+from products
+where Discontinued = 'N'
+order by ProductName;
+WITH DATA;
