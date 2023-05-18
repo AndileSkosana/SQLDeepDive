@@ -5,7 +5,7 @@ A deep dive into SQL for data engineers using PostgreSQL.
 
 2. Copy the script and PASTE it in a query in pgAdmin and run it as a query to create the db and the db objects.
 
-3. Run some of the queries in the queries file to ensure that your DB is correct.
+3. Run some of the queries in the Test_SQL file to ensure that your DB is correct.
 
 4. Create the db objects on your local copy of the database. 
 
