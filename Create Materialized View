@@ -2,8 +2,13 @@
 
 CREATE MATERIALIZED VIEW DEDOREXP_Products
 AS
-Select ProductID, ProductName
-from products
-where Discontinued = 'N'
-order by ProductName;
+SELECT DISTINCT a.category_name, 
+    b.product_name, 
+    b.quantity_per_unit, 
+    b.units_in_stock, 
+    b.discontinued
+FROM categories a
+INNER JOIN products b ON a.category_id = b.category_id
+WHERE b.discontinued = '0'
+ORDER BY a.category_name, b.product_name;
 WITH DATA;
